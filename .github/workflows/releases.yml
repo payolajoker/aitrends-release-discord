@@ -1,0 +1,48 @@
+name: Send AI Trends release alerts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0,30 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ai-trends-release-discord-main
+  cancel-in-progress: false
+
+jobs:
+  send-alerts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run notifier
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python src/main.py
+
+      - name: Commit updated state
+        shell: bash
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        run: |
+          if git diff --quiet -- data/sent_releases.json; then
+            echo "No state changes to commit."
+            exit 0
+          fi
+          git add data/sent_releases.json
+          git commit -m "Update sent releases state"
+          git push
