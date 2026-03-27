@@ -64,6 +64,7 @@
     "anthropics/claude-code@v2.1.84",
     "openai/codex@rust-v0.117.0",
     "anthropics/claude-code@v2.1.85",
-    "huggingface/transformers@v5.4.0"
+    "huggingface/transformers@v5.4.0",
+    "anthropics/claude-code@v2.1.86"
   ]
 }
