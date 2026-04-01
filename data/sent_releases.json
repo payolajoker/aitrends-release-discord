@@ -69,6 +69,8 @@
     "googleapis/python-genai@v1.69.0",
     "anthropics/claude-code@v2.1.88",
     "openai/codex@rust-v0.118.0",
-    "anthropics/anthropic-sdk-python@v0.87.0"
+    "anthropics/anthropic-sdk-python@v0.87.0",
+    "anthropics/claude-code@v2.1.89",
+    "googleapis/python-genai@v1.70.0"
   ]
 }
