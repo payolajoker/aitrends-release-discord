@@ -71,6 +71,9 @@
     "openai/codex@rust-v0.118.0",
     "anthropics/anthropic-sdk-python@v0.87.0",
     "anthropics/claude-code@v2.1.89",
-    "googleapis/python-genai@v1.70.0"
+    "googleapis/python-genai@v1.70.0",
+    "google-gemini/gemini-cli@v0.37.0-preview.0",
+    "google-gemini/gemini-cli@v0.36.0",
+    "anthropics/anthropic-sdk-python@v0.88.0"
   ]
 }
