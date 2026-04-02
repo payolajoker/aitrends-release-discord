@@ -75,6 +75,7 @@
     "google-gemini/gemini-cli@v0.37.0-preview.0",
     "google-gemini/gemini-cli@v0.36.0",
     "anthropics/anthropic-sdk-python@v0.88.0",
-    "anthropics/claude-code@v2.1.90"
+    "anthropics/claude-code@v2.1.90",
+    "google-gemini/gemini-cli@v0.36.0-nightly.20260402.13ccc1645"
   ]
 }
