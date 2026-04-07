@@ -82,6 +82,7 @@
     "anthropics/claude-code@v2.1.92",
     "google-gemini/gemini-cli@v0.36.0-nightly.20260406.15298b28c",
     "google-gemini/gemini-cli@v0.36.0-nightly.20260407.1c22c5b37",
-    "anthropics/anthropic-sdk-python@v0.90.0"
+    "anthropics/anthropic-sdk-python@v0.90.0",
+    "anthropics/anthropic-sdk-python@v0.91.0"
   ]
 }
