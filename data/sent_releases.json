@@ -88,6 +88,9 @@
     "anthropics/anthropic-sdk-python@v0.92.0",
     "google-gemini/gemini-cli@v0.38.0-preview.0",
     "google-gemini/gemini-cli@v0.37.0",
-    "googleapis/python-genai@v1.71.0"
+    "googleapis/python-genai@v1.71.0",
+    "google-gemini/gemini-cli@v0.39.0-nightly.20260408.a39461718",
+    "openai/openai-python@v2.31.0",
+    "anthropics/claude-code@v2.1.97"
   ]
 }
