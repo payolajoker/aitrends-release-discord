@@ -91,6 +91,8 @@
     "googleapis/python-genai@v1.71.0",
     "google-gemini/gemini-cli@v0.39.0-nightly.20260408.a39461718",
     "openai/openai-python@v2.31.0",
-    "anthropics/claude-code@v2.1.97"
+    "anthropics/claude-code@v2.1.97",
+    "google-gemini/gemini-cli@v0.39.0-nightly.20260409.615e07834",
+    "huggingface/transformers@v5.5.1"
   ]
 }
