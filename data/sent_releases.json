@@ -96,6 +96,7 @@
     "huggingface/transformers@v5.5.1",
     "huggingface/transformers@v5.5.2",
     "huggingface/transformers@v5.5.3",
-    "anthropics/anthropic-sdk-python@v0.93.0"
+    "anthropics/anthropic-sdk-python@v0.93.0",
+    "anthropics/claude-code@v2.1.98"
   ]
 }
