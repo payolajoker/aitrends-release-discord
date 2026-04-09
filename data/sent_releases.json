@@ -94,6 +94,7 @@
     "anthropics/claude-code@v2.1.97",
     "google-gemini/gemini-cli@v0.39.0-nightly.20260409.615e07834",
     "huggingface/transformers@v5.5.1",
-    "huggingface/transformers@v5.5.2"
+    "huggingface/transformers@v5.5.2",
+    "huggingface/transformers@v5.5.3"
   ]
 }
