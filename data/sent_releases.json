@@ -104,6 +104,7 @@
     "anthropics/anthropic-sdk-python@v0.94.0",
     "openai/codex@rust-v0.119.0",
     "google-gemini/gemini-cli@v0.39.0-nightly.20260411.0957f7d3e",
-    "openai/codex@rust-v0.120.0"
+    "openai/codex@rust-v0.120.0",
+    "huggingface/transformers@v5.5.4"
   ]
 }
