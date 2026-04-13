@@ -106,6 +106,7 @@
     "google-gemini/gemini-cli@v0.39.0-nightly.20260411.0957f7d3e",
     "openai/codex@rust-v0.120.0",
     "huggingface/transformers@v5.5.4",
-    "googleapis/python-genai@v1.73.0"
+    "googleapis/python-genai@v1.73.0",
+    "anthropics/claude-code@v2.1.105"
   ]
 }
