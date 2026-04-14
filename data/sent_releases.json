@@ -109,6 +109,9 @@
     "googleapis/python-genai@v1.73.0",
     "anthropics/claude-code@v2.1.105",
     "google-gemini/gemini-cli@v0.39.0-nightly.20260414.gdaf500623",
-    "anthropics/claude-code@v2.1.107"
+    "anthropics/claude-code@v2.1.107",
+    "anthropics/anthropic-sdk-python@v0.95.0",
+    "anthropics/claude-code@v2.1.108",
+    "googleapis/python-genai@v1.73.1"
   ]
 }
