@@ -121,6 +121,7 @@
     "anthropics/claude-code@v2.1.110",
     "openai/openai-python@v2.32.0",
     "anthropics/anthropic-sdk-python@v0.96.0",
-    "anthropics/claude-code@v2.1.111"
+    "anthropics/claude-code@v2.1.111",
+    "anthropics/claude-code@v2.1.113"
   ]
 }
