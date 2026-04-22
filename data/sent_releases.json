@@ -125,6 +125,7 @@
     "anthropics/claude-code@v2.1.113",
     "openai/codex@rust-v0.122.0",
     "anthropics/claude-code@v2.1.116",
-    "anthropics/claude-code@v2.1.117"
+    "anthropics/claude-code@v2.1.117",
+    "huggingface/transformers@v5.6.0"
   ]
 }
