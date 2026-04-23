@@ -128,6 +128,8 @@
     "anthropics/claude-code@v2.1.117",
     "huggingface/transformers@v5.6.0",
     "anthropics/claude-code@v2.1.118",
-    "openai/codex@rust-v0.123.0"
+    "openai/codex@rust-v0.123.0",
+    "google-gemini/gemini-cli@v0.40.0-preview.2",
+    "google-gemini/gemini-cli@v0.39.0"
   ]
 }
