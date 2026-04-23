@@ -134,6 +134,7 @@
     "google-gemini/gemini-cli@v0.41.0-nightly.20260423.gd1c91f526",
     "huggingface/transformers@v5.6.1",
     "openai/codex@rust-v0.124.0",
-    "huggingface/transformers@v5.6.2"
+    "huggingface/transformers@v5.6.2",
+    "anthropics/anthropic-sdk-python@v0.97.0"
   ]
 }
