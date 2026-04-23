@@ -131,6 +131,7 @@
     "openai/codex@rust-v0.123.0",
     "google-gemini/gemini-cli@v0.40.0-preview.2",
     "google-gemini/gemini-cli@v0.39.0",
-    "google-gemini/gemini-cli@v0.41.0-nightly.20260423.gd1c91f526"
+    "google-gemini/gemini-cli@v0.41.0-nightly.20260423.gd1c91f526",
+    "huggingface/transformers@v5.6.1"
   ]
 }
