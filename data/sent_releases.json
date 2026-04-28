@@ -142,6 +142,9 @@
     "google-gemini/gemini-cli@v0.41.0-nightly.20260427.g42587de73",
     "anthropics/claude-code@v2.1.121",
     "google-gemini/gemini-cli@v0.41.0-nightly.20260428.gc17400b83",
-    "openai/openai-python@v2.33.0"
+    "openai/openai-python@v2.33.0",
+    "huggingface/transformers@v5.7.0",
+    "google-gemini/gemini-cli@v0.41.0-preview.0",
+    "google-gemini/gemini-cli@v0.40.0"
   ]
 }
