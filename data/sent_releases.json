@@ -162,6 +162,8 @@
     "google-gemini/gemini-cli@v0.42.0-preview.0",
     "google-gemini/gemini-cli@v0.41.0",
     "anthropics/claude-code@v2.1.129",
-    "anthropics/claude-code@v2.1.131"
+    "anthropics/claude-code@v2.1.131",
+    "anthropics/anthropic-sdk-python@v0.100.0",
+    "openai/openai-python@v2.35.0"
   ]
 }
