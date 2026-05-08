@@ -170,6 +170,7 @@
     "openai/codex@rust-v0.129.0",
     "google-gemini/gemini-cli@v0.42.0-nightly.20260507.ga809bc7c5",
     "openai/openai-python@v2.36.0",
-    "googleapis/python-genai@v2.0.0"
+    "googleapis/python-genai@v2.0.0",
+    "anthropics/claude-code@v2.1.133"
   ]
 }
