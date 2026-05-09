@@ -172,6 +172,8 @@
     "openai/openai-python@v2.36.0",
     "googleapis/python-genai@v2.0.0",
     "anthropics/claude-code@v2.1.133",
-    "anthropics/claude-code@v2.1.136"
+    "anthropics/claude-code@v2.1.136",
+    "openai/codex@rust-v0.130.0",
+    "anthropics/claude-code@v2.1.137"
   ]
 }
