@@ -183,6 +183,7 @@
     "anthropics/claude-code@v2.1.140",
     "googleapis/python-genai@v2.2.0",
     "google-gemini/gemini-cli@v0.43.0-preview.0",
-    "google-gemini/gemini-cli@v0.42.0"
+    "google-gemini/gemini-cli@v0.42.0",
+    "huggingface/transformers@v5.8.1"
   ]
 }
