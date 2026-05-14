@@ -184,6 +184,7 @@
     "googleapis/python-genai@v2.2.0",
     "google-gemini/gemini-cli@v0.43.0-preview.0",
     "google-gemini/gemini-cli@v0.42.0",
-    "huggingface/transformers@v5.8.1"
+    "huggingface/transformers@v5.8.1",
+    "google-gemini/gemini-cli@v0.44.0-nightly.20260514.g77078b3e8"
   ]
 }
