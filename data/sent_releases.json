@@ -187,6 +187,7 @@
     "huggingface/transformers@v5.8.1",
     "google-gemini/gemini-cli@v0.44.0-nightly.20260514.g77078b3e8",
     "anthropics/claude-code@v2.1.142",
-    "google-gemini/gemini-cli@v0.44.0-nightly.20260515.g928a311fb"
+    "google-gemini/gemini-cli@v0.44.0-nightly.20260515.g928a311fb",
+    "googleapis/python-genai@v2.3.0"
   ]
 }
