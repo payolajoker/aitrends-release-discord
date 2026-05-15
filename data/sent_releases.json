@@ -188,6 +188,8 @@
     "google-gemini/gemini-cli@v0.44.0-nightly.20260514.g77078b3e8",
     "anthropics/claude-code@v2.1.142",
     "google-gemini/gemini-cli@v0.44.0-nightly.20260515.g928a311fb",
-    "googleapis/python-genai@v2.3.0"
+    "googleapis/python-genai@v2.3.0",
+    "anthropics/claude-code@v2.1.143",
+    "openai/openai-python@v2.37.0"
   ]
 }
