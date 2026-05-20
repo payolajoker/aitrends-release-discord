@@ -198,6 +198,7 @@
     "anthropics/claude-code@v2.1.144",
     "anthropics/anthropic-sdk-python@v0.103.0",
     "anthropics/claude-code@v2.1.145",
-    "openai/codex@rust-v0.132.0"
+    "openai/codex@rust-v0.132.0",
+    "huggingface/transformers@v5.9.0"
   ]
 }
