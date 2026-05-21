@@ -200,6 +200,8 @@
     "anthropics/claude-code@v2.1.145",
     "openai/codex@rust-v0.132.0",
     "huggingface/transformers@v5.9.0",
-    "googleapis/python-genai@v2.5.0"
+    "googleapis/python-genai@v2.5.0",
+    "google-gemini/gemini-cli@v0.44.0-nightly.20260521.g57c42a5c4",
+    "anthropics/claude-code@v2.1.146"
   ]
 }
