@@ -214,6 +214,7 @@
     "googleapis/python-genai@v2.7.0",
     "anthropics/anthropic-sdk-python@v0.105.0",
     "openai/codex@rust-v0.135.0",
-    "anthropics/claude-code@v2.1.154"
+    "anthropics/claude-code@v2.1.154",
+    "anthropics/claude-code@v2.1.157"
   ]
 }
