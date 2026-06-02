@@ -218,6 +218,7 @@
     "anthropics/claude-code@v2.1.157",
     "anthropics/claude-code@v2.1.158",
     "openai/codex@rust-v0.136.0",
-    "openai/openai-python@v2.39.0"
+    "openai/openai-python@v2.39.0",
+    "openai/openai-python@v2.40.0"
   ]
 }
