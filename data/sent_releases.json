@@ -219,6 +219,8 @@
     "anthropics/claude-code@v2.1.158",
     "openai/codex@rust-v0.136.0",
     "openai/openai-python@v2.39.0",
-    "openai/openai-python@v2.40.0"
+    "openai/openai-python@v2.40.0",
+    "google-gemini/gemini-cli@v0.45.0-nightly.20260602.g665228e98",
+    "anthropics/claude-code@v2.1.160"
   ]
 }
