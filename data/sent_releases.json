@@ -233,6 +233,7 @@
     "google-gemini/gemini-cli@v0.47.0-nightly.20260604.g4196596f7",
     "anthropics/claude-code@v2.1.174",
     "anthropics/claude-code@v2.1.175",
-    "huggingface/transformers@v5.12.0"
+    "huggingface/transformers@v5.12.0",
+    "anthropics/claude-code@v2.1.176"
   ]
 }
