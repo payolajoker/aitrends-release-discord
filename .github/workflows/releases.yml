@@ -1,4 +1,4 @@
-name: Send AI Trends release alerts
+name: Send AI Trends article alerts
 
 on:
   workflow_dispatch:
@@ -28,7 +28,6 @@ jobs:
       - name: Run notifier
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          GITHUB_TOKEN: ${{ github.token }}
         run: python src/main.py
 
       - name: Commit updated state
@@ -44,5 +43,5 @@ jobs:
             exit 0
           fi
           git add data/sent_releases.json
-          git commit -m "Update sent releases state"
+          git commit -m "Update sent articles state"
           git push

@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 import json
 import os
 import sys
-import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -10,19 +11,25 @@ from pathlib import Path
 from typing import Any
 
 
-BASE_URL = os.environ.get("AITRENDS_BASE_URL", "https://aitrends.kr")
+BASE_URL = os.environ.get("AITRENDS_BASE_URL", "https://aitrends.kr").rstrip("/")
 DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL", "")
-FETCH_LIMIT = int(os.environ.get("FETCH_LIMIT", "30"))
+FETCH_LIMIT = max(1, int(os.environ.get("FETCH_LIMIT", "30")))
 STATE_FILE = Path(os.environ.get("STATE_FILE", "data/sent_releases.json"))
 DRY_RUN = os.environ.get("DRY_RUN", "0") == "1"
-MAX_SENT_IDS = int(os.environ.get("MAX_SENT_IDS", "1000"))
+MAX_SENT_IDS = max(1, int(os.environ.get("MAX_SENT_IDS", "1000")))
+ARTICLE_SUMMARY_STATUS = os.environ.get("ARTICLE_SUMMARY_STATUS", "completed")
+ARTICLE_SORT_BY = os.environ.get("ARTICLE_SORT_BY", "latest")
+EMBEDS_PER_MESSAGE = min(10, max(1, int(os.environ.get("EMBEDS_PER_MESSAGE", "5"))))
 
-SIGNIFICANCE_ORDER = {"critical": 0, "notable": 1}
 EMBED_COLORS = {
-    "critical": 15158332,
-    "notable": 3447003,
+    "article": 3447003,
+    "youtube": 16711680,
+    "reddit": 16729344,
+    "paper": 10181046,
+    "rss": 3447003,
+    "web": 5763719,
+    "twitter": 1942002,
 }
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
 
 def fetch_json(url: str) -> dict[str, Any]:
@@ -30,19 +37,6 @@ def fetch_json(url: str) -> dict[str, Any]:
         "Accept": "application/json",
         "User-Agent": "AI-Trends-Discord-Notifier/1.0",
     }
-    request = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(request, timeout=30) as response:
-        return json.loads(response.read().decode("utf-8"))
-
-
-def fetch_github_release(owner: str, repo: str, tag_name: str) -> dict[str, Any]:
-    url = f"https://api.github.com/repos/{owner}/{repo}/releases/tags/{urllib.parse.quote(tag_name)}"
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "User-Agent": "AI-Trends-Discord-Notifier/1.0",
-    }
-    if GITHUB_TOKEN:
-        headers["Authorization"] = f"Bearer {GITHUB_TOKEN}"
     request = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(request, timeout=30) as response:
         return json.loads(response.read().decode("utf-8"))
@@ -69,13 +63,20 @@ def save_state(state: dict[str, list[str]]) -> None:
         handle.write("\n")
 
 
-def build_releases_url(significance: str) -> str:
-    query = urllib.parse.urlencode({"significance": significance, "limit": FETCH_LIMIT})
-    return f"{BASE_URL}/api/releases?{query}"
+def build_articles_url() -> str:
+    query = urllib.parse.urlencode(
+        {
+            "limit": FETCH_LIMIT,
+            "summary_status": ARTICLE_SUMMARY_STATUS,
+            "sort_by": ARTICLE_SORT_BY,
+        }
+    )
+    return f"{BASE_URL}/api/articles?{query}"
 
 
-def clean_text(value: str, limit: int) -> str:
-    text = (value or "").replace("\r", "\n")
+def clean_text(value: Any, limit: int) -> str:
+    text = "" if value is None else str(value)
+    text = text.replace("\r", "\n")
     lines = [line.strip() for line in text.splitlines() if line.strip()]
     compact = " ".join(lines)
     compact = compact.replace("**", "").replace("__", "").replace("`", "'")
@@ -84,91 +85,114 @@ def clean_text(value: str, limit: int) -> str:
     return compact[: limit - 3].rstrip() + "..."
 
 
-def summarize_release_body(value: str) -> str:
-    text = (value or "").replace("\r", "")
-    cleaned_lines: list[str] = []
-    for line in text.splitlines():
-        stripped = line.strip()
-        if not stripped:
-            continue
-        if stripped.startswith("!["):
-            continue
-        if stripped.lower().startswith("full changelog"):
-            continue
-        if stripped.startswith("##"):
-            continue
-        if stripped.startswith("*") or stripped.startswith("-"):
-            stripped = stripped[1:].strip()
-        cleaned_lines.append(stripped)
-        if len(" ".join(cleaned_lines)) >= 700:
-            break
-
-    summary = clean_text(" ".join(cleaned_lines), 700)
-    if summary:
-        return summary
-    return "Release notes body is empty."
+def article_state_id(item: dict[str, Any]) -> str:
+    article_id = item.get("id") or item.get("link") or item.get("created_at") or "unknown"
+    return f"article:{article_id}"
 
 
-def release_id(item: dict[str, Any]) -> str:
-    owner = item.get("owner", "unknown")
-    repo = item.get("repo", "unknown")
-    tag_name = item.get("tag_name", "unknown")
-    return f"{owner}/{repo}@{tag_name}"
+def article_page_url(item: dict[str, Any]) -> str:
+    article_id = item.get("id")
+    if article_id is None:
+        return BASE_URL
+    return f"{BASE_URL}/articles/{urllib.parse.quote(str(article_id))}"
 
 
-def normalize_release(item: dict[str, Any]) -> dict[str, Any]:
-    title = item.get("title_ko") or item.get("release_name") or release_id(item)
-    summary = item.get("one_line_summary") or "릴리즈 요약이 제공되지 않았습니다."
+def normalize_article(item: dict[str, Any]) -> dict[str, Any]:
+    summary_json = item.get("ai_summary_json")
+    if not isinstance(summary_json, dict):
+        summary_json = {}
+
+    source = item.get("sources")
+    if not isinstance(source, dict):
+        source = {}
+
+    title = (
+        item.get("hook_title_ko")
+        or summary_json.get("hook_title_ko")
+        or item.get("title_ko")
+        or summary_json.get("title_ko")
+        or item.get("title")
+        or article_state_id(item)
+    )
+    summary = (
+        summary_json.get("one_line_summary")
+        or summary_json.get("tldr")
+        or item.get("ai_summary_ko")
+        or item.get("summary")
+        or "기사 요약이 제공되지 않았습니다."
+    )
+    source_name = source.get("name") or "AI Trends"
+    source_type = str(source.get("source_type") or "article").lower()
+
     return {
-        "id": release_id(item),
-        "repo": f"{item.get('owner', 'unknown')}/{item.get('repo', 'unknown')}",
-        "version": item.get("tag_name", "unknown"),
+        "id": article_state_id(item),
+        "article_id": item.get("id"),
+        "source": clean_text(source_name, 80),
+        "source_type": clean_text(source_type, 40),
+        "category": clean_text(source.get("category") or summary_json.get("category") or "", 80),
         "title": clean_text(title, 200),
-        "summary": clean_text(summary, 600),
-        "github_url": item.get("github_url") or f"https://github.com/{item.get('owner', '')}/{item.get('repo', '')}",
-        "significance": str(item.get("significance", "notable")).lower(),
-        "published_at": item.get("published_at"),
+        "summary": clean_text(summary, 520),
+        "url": item.get("link") or article_page_url(item),
+        "aitrends_url": article_page_url(item),
+        "published_at": item.get("published_at") or item.get("created_at"),
     }
 
 
-def enrich_release(item: dict[str, Any]) -> dict[str, Any]:
-    owner, repo = item["repo"].split("/", 1)
+def read_http_error(error: urllib.error.HTTPError) -> str:
     try:
-        github_release = fetch_github_release(owner, repo, item["version"])
-    except urllib.error.HTTPError:
-        return item
-    except urllib.error.URLError:
-        return item
-
-    title = github_release.get("name") or item["title"]
-    summary = summarize_release_body(str(github_release.get("body") or ""))
-    github_url = github_release.get("html_url") or item["github_url"]
-    published_at = github_release.get("published_at") or item["published_at"]
-
-    enriched = dict(item)
-    enriched["title"] = clean_text(str(title), 200)
-    enriched["summary"] = summary
-    enriched["github_url"] = str(github_url)
-    enriched["published_at"] = published_at
-    time.sleep(0.2)
-    return enriched
+        detail = error.read().decode("utf-8", errors="replace")
+    except Exception:  # noqa: BLE001
+        return ""
+    if "<html" in detail[:200].lower() or "<!doctype" in detail[:200].lower():
+        return "HTML error response"
+    return clean_text(detail, 500)
 
 
-def fetch_releases() -> list[dict[str, Any]]:
+def fetch_articles() -> list[dict[str, Any]]:
+    url = build_articles_url()
+    try:
+        data = fetch_json(url)
+    except urllib.error.HTTPError as error:
+        detail = read_http_error(error)
+        print(
+            f"AI Trends API unavailable; skipping this run without failing. "
+            f"HTTP {error.code}: {detail}",
+            file=sys.stderr,
+        )
+        return []
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as error:
+        print(
+            f"AI Trends API unavailable; skipping this run without failing. {error}",
+            file=sys.stderr,
+        )
+        return []
+
+    if not isinstance(data, dict):
+        print(
+            "AI Trends API response was not a JSON object; skipping this run without failing.",
+            file=sys.stderr,
+        )
+        return []
+
+    raw_articles = data.get("articles")
+    if not isinstance(raw_articles, list):
+        print(
+            "AI Trends API response did not include an articles list; "
+            "skipping this run without failing.",
+            file=sys.stderr,
+        )
+        return []
+
     items: dict[str, dict[str, Any]] = {}
-    for significance in ("critical", "notable"):
-        data = fetch_json(build_releases_url(significance))
-        for raw_item in data.get("releases", []):
-            normalized = normalize_release(raw_item)
-            items[normalized["id"]] = normalized
+    for raw_item in raw_articles:
+        if not isinstance(raw_item, dict):
+            continue
+        normalized = normalize_article(raw_item)
+        items[normalized["id"]] = normalized
 
     return sorted(
         items.values(),
-        key=lambda item: (
-            SIGNIFICANCE_ORDER.get(item["significance"], 99),
-            item.get("published_at") or "",
-            item["repo"],
-        ),
+        key=lambda item: (item.get("published_at") or "", item["source"], item["title"]),
     )
 
 
@@ -183,35 +207,38 @@ def iso_timestamp(value: str | None) -> str:
 
 
 def build_embed(item: dict[str, Any]) -> dict[str, Any]:
-    significance = item["significance"]
-    label = significance.capitalize()
+    source_type = item["source_type"]
     description = (
         f"**제목** {item['title']}\n"
-        f"**내용** {item['summary']}"
+        f"**요약** {item['summary']}"
     )
+    fields = [
+        {"name": "Source", "value": f"`{item['source']}`", "inline": True},
+        {"name": "Type", "value": f"`{source_type}`", "inline": True},
+        {"name": "AI Trends", "value": item["aitrends_url"], "inline": False},
+    ]
+    if item["category"]:
+        fields.insert(2, {"name": "Category", "value": f"`{item['category']}`", "inline": True})
+
     return {
-        "title": f"[{label}] {item['repo']}",
-        "url": item["github_url"],
+        "title": f"[Article] {item['source']}",
+        "url": item["url"],
         "description": description,
-        "color": EMBED_COLORS.get(significance, 3447003),
-        "fields": [
-            {"name": "Repo", "value": f"`{item['repo']}`", "inline": True},
-            {"name": "Version", "value": f"`{item['version']}`", "inline": True},
-            {"name": "GitHub", "value": item["github_url"], "inline": False},
-        ],
-        "footer": {"text": "AI Trends Releases Monitor"},
+        "color": EMBED_COLORS.get(source_type, EMBED_COLORS["article"]),
+        "fields": fields,
+        "footer": {"text": "AI Trends Articles Monitor"},
         "timestamp": iso_timestamp(item.get("published_at")),
     }
 
 
-def post_to_discord(releases: list[dict[str, Any]]) -> None:
-    if not releases:
+def post_to_discord(articles: list[dict[str, Any]]) -> None:
+    if not articles:
         return
 
     if not DISCORD_WEBHOOK_URL and not DRY_RUN:
         raise RuntimeError("DISCORD_WEBHOOK_URL is required unless DRY_RUN=1")
 
-    for batch in chunked(releases, 10):
+    for batch in chunked(articles, EMBEDS_PER_MESSAGE):
         payload = {
             "content": None,
             "embeds": [build_embed(item) for item in batch],
@@ -238,26 +265,25 @@ def post_to_discord(releases: list[dict[str, Any]]) -> None:
 def main() -> int:
     try:
         state = load_state()
-        releases = fetch_releases()
+        articles = fetch_articles()
         sent_ids = set(state["sent_ids"])
-        unsent = [item for item in releases if item["id"] not in sent_ids]
+        unsent = [item for item in articles if item["id"] not in sent_ids]
 
         if not unsent:
-            print("No new Critical or Notable releases to send.")
+            print("No new completed AI Trends articles to send.")
             return 0
 
-        enriched = [enrich_release(item) for item in unsent]
-        post_to_discord(enriched)
+        post_to_discord(unsent)
 
         if not DRY_RUN:
-            for item in enriched:
+            for item in unsent:
                 state["sent_ids"].append(item["id"])
             save_state(state)
 
-        print(f"Sent {len(enriched)} release notifications.")
+        print(f"Sent {len(unsent)} article notifications.")
         return 0
     except urllib.error.HTTPError as error:
-        detail = error.read().decode("utf-8", errors="replace")
+        detail = read_http_error(error)
         print(f"HTTPError: {error.code} {detail}", file=sys.stderr)
         return 1
     except Exception as error:  # noqa: BLE001
