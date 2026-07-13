@@ -1,7 +1,5 @@
 {
   "sent_ids": [
-    "huggingface/transformers@v5.1.0",
-    "tensorflow/tensorflow@v2.21.0-rc0",
     "huggingface/transformers@v5.2.0",
     "googleapis/python-genai@v1.65.0",
     "tensorflow/tensorflow@v2.21.0-rc1",
@@ -999,6 +997,8 @@
     "article:76554",
     "article:76560",
     "article:76559",
-    "article:76563"
+    "article:76563",
+    "article:76576",
+    "article:76585"
   ]
 }
