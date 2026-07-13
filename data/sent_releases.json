@@ -1,9 +1,5 @@
 {
   "sent_ids": [
-    "huggingface/transformers@v5.0.0rc2",
-    "pytorch/pytorch@v2.10.0",
-    "huggingface/transformers@v5.0.0rc3",
-    "huggingface/transformers@v5.0.0",
     "huggingface/transformers@v5.1.0",
     "tensorflow/tensorflow@v2.21.0-rc0",
     "huggingface/transformers@v5.2.0",
@@ -999,6 +995,10 @@
     "article:76538",
     "article:76540",
     "article:76534",
-    "article:76547"
+    "article:76547",
+    "article:76554",
+    "article:76560",
+    "article:76559",
+    "article:76563"
   ]
 }
