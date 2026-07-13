@@ -1,16 +1,5 @@
 {
   "sent_ids": [
-    "google-gemini/gemini-cli@v0.36.0-nightly.20260318.e2658ccda",
-    "pytorch/pytorch@v2.11.0",
-    "google-gemini/gemini-cli@v0.36.0-preview.0",
-    "google-gemini/gemini-cli@v0.35.0",
-    "openai/openai-python@v2.21.0",
-    "anthropics/anthropic-sdk-python@v0.80.0",
-    "anthropics/anthropic-sdk-python@v0.81.0",
-    "anthropics/anthropic-sdk-python@v0.82.0",
-    "googleapis/python-genai@v1.64.0",
-    "anthropics/anthropic-sdk-python@v0.83.0",
-    "openai/openai-python@v2.22.0",
     "openai/openai-python@v2.23.0",
     "openai/openai-python@v2.24.0",
     "anthropics/anthropic-sdk-python@v0.84.0",
@@ -999,6 +988,17 @@
     "article:76639",
     "article:76638",
     "article:76628",
-    "article:76630"
+    "article:76630",
+    "article:76591",
+    "article:76615",
+    "article:76664",
+    "article:76673",
+    "article:76659",
+    "article:76660",
+    "article:76674",
+    "article:76665",
+    "article:76656",
+    "article:76658",
+    "article:76676"
   ]
 }
