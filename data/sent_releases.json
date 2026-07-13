@@ -1,11 +1,5 @@
 {
   "sent_ids": [
-    "openai/openai-python@v2.26.0",
-    "tensorflow/tensorflow@v2.21.0",
-    "googleapis/python-genai@v1.67.0",
-    "google-gemini/gemini-cli@v0.35.0-preview.1",
-    "google-gemini/gemini-cli@v0.34.0",
-    "googleapis/python-genai@v1.68.0",
     "google-gemini/gemini-cli@v0.36.0-nightly.20260318.e2658ccda",
     "pytorch/pytorch@v2.11.0",
     "google-gemini/gemini-cli@v0.36.0-preview.0",
@@ -999,6 +993,12 @@
     "article:76593",
     "article:76602",
     "article:76610",
-    "article:76614"
+    "article:76614",
+    "article:76598",
+    "article:76618",
+    "article:76639",
+    "article:76638",
+    "article:76628",
+    "article:76630"
   ]
 }
