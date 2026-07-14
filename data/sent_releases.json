@@ -1,8 +1,5 @@
 {
   "sent_ids": [
-    "anthropics/claude-code@v2.1.88",
-    "openai/codex@rust-v0.118.0",
-    "anthropics/anthropic-sdk-python@v0.87.0",
     "anthropics/claude-code@v2.1.89",
     "googleapis/python-genai@v1.70.0",
     "google-gemini/gemini-cli@v0.37.0-preview.0",
@@ -999,6 +996,9 @@
     "article:76778",
     "article:76781",
     "article:76773",
-    "article:76776"
+    "article:76776",
+    "article:76795",
+    "article:76799",
+    "article:76801"
   ]
 }
