@@ -1,13 +1,5 @@
 {
   "sent_ids": [
-    "huggingface/transformers@v5.5.2",
-    "huggingface/transformers@v5.5.3",
-    "anthropics/anthropic-sdk-python@v0.93.0",
-    "anthropics/claude-code@v2.1.98",
-    "googleapis/python-genai@v1.72.0",
-    "google-gemini/gemini-cli@v0.39.0-nightly.20260410.96cc8a0da",
-    "anthropics/claude-code@v2.1.101",
-    "anthropics/anthropic-sdk-python@v0.94.0",
     "openai/codex@rust-v0.119.0",
     "google-gemini/gemini-cli@v0.39.0-nightly.20260411.0957f7d3e",
     "openai/codex@rust-v0.120.0",
@@ -999,6 +991,14 @@
     "article:76897",
     "article:76903",
     "article:76898",
-    "article:76906"
+    "article:76906",
+    "article:76907",
+    "article:76918",
+    "article:76928",
+    "article:76930",
+    "article:76914",
+    "article:76926",
+    "article:76933",
+    "article:76924"
   ]
 }
