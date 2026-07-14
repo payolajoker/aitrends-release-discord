@@ -1,12 +1,5 @@
 {
   "sent_ids": [
-    "openai/openai-python@v2.30.0",
-    "anthropics/claude-code@v2.1.84",
-    "openai/codex@rust-v0.117.0",
-    "anthropics/claude-code@v2.1.85",
-    "huggingface/transformers@v5.4.0",
-    "anthropics/claude-code@v2.1.86",
-    "googleapis/python-genai@v1.69.0",
     "anthropics/claude-code@v2.1.88",
     "openai/codex@rust-v0.118.0",
     "anthropics/anthropic-sdk-python@v0.87.0",
@@ -999,6 +992,13 @@
     "article:76696",
     "article:76728",
     "article:76749",
-    "article:76751"
+    "article:76751",
+    "article:76762",
+    "article:76669",
+    "article:76768",
+    "article:76778",
+    "article:76781",
+    "article:76773",
+    "article:76776"
   ]
 }
