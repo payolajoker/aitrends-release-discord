@@ -1,15 +1,5 @@
 {
   "sent_ids": [
-    "google-gemini/gemini-cli@v0.42.0-preview.0",
-    "google-gemini/gemini-cli@v0.41.0",
-    "anthropics/claude-code@v2.1.129",
-    "anthropics/claude-code@v2.1.131",
-    "anthropics/anthropic-sdk-python@v0.100.0",
-    "openai/openai-python@v2.35.0",
-    "google-gemini/gemini-cli@v0.42.0-nightly.20260506.g80d269054",
-    "anthropics/claude-code@v2.1.132",
-    "openai/codex@rust-v0.129.0",
-    "google-gemini/gemini-cli@v0.42.0-nightly.20260507.ga809bc7c5",
     "openai/openai-python@v2.36.0",
     "googleapis/python-genai@v2.0.0",
     "anthropics/claude-code@v2.1.133",
@@ -999,6 +989,16 @@
     "article:77102",
     "article:77118",
     "article:77109",
-    "article:77116"
+    "article:77116",
+    "article:77075",
+    "article:77132",
+    "article:77133",
+    "article:77151",
+    "article:77141",
+    "article:77155",
+    "article:77145",
+    "article:77156",
+    "article:77142",
+    "article:77147"
   ]
 }
