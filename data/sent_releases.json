@@ -1,6 +1,5 @@
 {
   "sent_ids": [
-    "google-gemini/gemini-cli@v0.41.0-preview.0",
     "google-gemini/gemini-cli@v0.40.0",
     "anthropics/claude-code@v2.1.122",
     "google-gemini/gemini-cli@v0.42.0-nightly.20260429.g6d9911393",
@@ -999,6 +998,7 @@
     "article:77013",
     "article:77027",
     "article:77022",
-    "article:77028"
+    "article:77028",
+    "article:77032"
   ]
 }
