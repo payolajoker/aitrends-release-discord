@@ -1,9 +1,5 @@
 {
   "sent_ids": [
-    "openai/openai-python@v2.36.0",
-    "googleapis/python-genai@v2.0.0",
-    "anthropics/claude-code@v2.1.133",
-    "anthropics/claude-code@v2.1.136",
     "openai/codex@rust-v0.130.0",
     "anthropics/claude-code@v2.1.137",
     "anthropics/anthropic-sdk-python@v0.101.0",
@@ -999,6 +995,10 @@
     "article:77145",
     "article:77156",
     "article:77142",
-    "article:77147"
+    "article:77147",
+    "article:77173",
+    "article:77170",
+    "article:77183",
+    "article:77178"
   ]
 }
