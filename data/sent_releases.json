@@ -1,10 +1,5 @@
 {
   "sent_ids": [
-    "article:74822",
-    "article:74850",
-    "article:74835",
-    "article:74847",
-    "article:74819",
     "article:74854",
     "article:74837",
     "article:74838",
@@ -999,6 +994,11 @@
     "article:82701",
     "article:82707",
     "article:82697",
-    "article:82706"
+    "article:82706",
+    "article:82710",
+    "article:82723",
+    "article:82722",
+    "article:82730",
+    "article:82755"
   ]
 }
