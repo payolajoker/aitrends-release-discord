@@ -1,17 +1,5 @@
 {
   "sent_ids": [
-    "article:75078",
-    "article:75073",
-    "article:75074",
-    "article:75080",
-    "article:75092",
-    "article:75101",
-    "article:75119",
-    "article:75118",
-    "article:75117",
-    "article:75114",
-    "article:75128",
-    "article:75141",
     "article:75143",
     "article:75150",
     "article:75149",
@@ -999,6 +987,18 @@
     "article:83887",
     "article:83848",
     "article:83886",
-    "article:83853"
+    "article:83853",
+    "article:71131",
+    "article:74826",
+    "article:83744",
+    "article:83771",
+    "article:83811",
+    "article:83861",
+    "article:83905",
+    "article:83860",
+    "article:83901",
+    "article:83883",
+    "article:83863",
+    "article:83910"
   ]
 }
